@@ -20,7 +20,7 @@ const AttendanceForm = () => {
     "Marigold", "Denyce", "Anievie", "Ezra Mae",
     "Steven Jan", "Levi", "Michael", "Delia",
     "Chelo Marie", "Remedios", "Maryhall", "Ana Maria",
-    "Jecka", "Aeron", "Walleengwapo"
+    "Jecka", "Aeron", "Walleengwapo", "Jeron"
   ]; // Add allowed names here
 
   const handleNameChange = (e) => setName(e.target.value);
