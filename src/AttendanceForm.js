@@ -7,6 +7,7 @@ const AttendanceForm = () => {
   const [names, setNames] = useState([]); // List of multiple names
   const [formData, setFormData] = useState({
     category: "",
+    customCategory: "", // For custom category input
   });
 
   const [submitted, setSubmitted] = useState(false); // To track submission status
@@ -14,7 +15,12 @@ const AttendanceForm = () => {
   const handleNameChange = (e) => setName(e.target.value);
 
   const handleCategoryChange = (e) => {
-    setFormData({ ...formData, category: e.target.value });
+    const { value } = e.target;
+    setFormData({ ...formData, category: value, customCategory: value === "Others" ? "" : formData.customCategory });
+  };
+
+  const handleCustomCategoryChange = (e) => {
+    setFormData({ ...formData, customCategory: e.target.value });
   };
 
   const handleAddName = (e) => {
@@ -39,7 +45,7 @@ const AttendanceForm = () => {
     // Prepare the full data to send via email
     const totalNames = names.length; // Count the total number of names
     const fullData = {
-      category: formData.category,         // Category selected
+      category: formData.category === "Others" ? formData.customCategory : formData.category, // Use custom category if selected
       names: names.join(", "),             // List of names, joined by comma
       date: new Date().toLocaleDateString(), // Current date
       total: totalNames                     // Total number of names
@@ -64,7 +70,7 @@ const AttendanceForm = () => {
         });
 
       // Reset form after submission
-      setFormData({ category: "" });
+      setFormData({ category: "", customCategory: "" });
       setNames([]);
     }
   };
@@ -90,9 +96,23 @@ const AttendanceForm = () => {
               <option value="RS and EQ combine">RS and EQ combine</option>
               <option value="YM and YWM combine">YM and YWM combine</option>
               <option value="Primary">Primary</option>
+              <option value="Others">Others</option>
             </select>
           </div>
-          
+
+          {/* Show custom category input if "Others" is selected */}
+          {formData.category === "Others" && (
+            <div>
+              <label>Custom Category:</label>
+              <input
+                type="text"
+                value={formData.customCategory}
+                onChange={handleCustomCategoryChange}
+                required
+              />
+            </div>
+          )}
+
           {/* Disable the name input if no category is selected */}
           <div>
             <label>Name:</label>
@@ -107,18 +127,15 @@ const AttendanceForm = () => {
               Add Name
             </button>
           </div>
-          
+
           <div>
             <h3>Added Names:</h3>
             <ul>
-            {names.map((n, index) => (
-  <li key={index}>
-    {n} 
-    <button className="delete-button" onClick={() => handleDeleteName(index)}>
-      Delete
-    </button>
-  </li>
-))}
+              {names.map((n, index) => (
+                <li key={index}>
+                  {n} <button className="delete-button" onClick={() => handleDeleteName(index)}>Delete</button>
+                </li>
+              ))}
             </ul>
           </div>
 
