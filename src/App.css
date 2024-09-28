@@ -51,14 +51,14 @@ input[type="text"] {
 }
 
 button {
-  padding: 10px 15px; /* Padding inside buttons */
+  padding: 10px 10px; /* Padding inside buttons */
   background-color: #4CAF50; /* Green background */
   color: white; /* White text */
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s; /* Smooth transition */
-  width: 100%; /* Full width for buttons */
+  width: 200px; /* Full width for buttons */
 }
 
 button:hover {
