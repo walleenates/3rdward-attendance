@@ -3,7 +3,7 @@ import emailjs from "emailjs-com";
 import './App.css';
 
 const AttendanceForm = () => {
-  // Checklist names for each auxiliary
+  // Checklist names for each auxiliary (including YSA names)
   const checklistNames = {
     "Elders Quorum": [],
     "Relief Society": [],
@@ -36,7 +36,7 @@ const AttendanceForm = () => {
   // Allowed recorder names
   const allowedRecorders = [
     "Roy Cotejo", "Elias Concardas", "Archie Ruda", "Joshua Ejares",
-    "Marigold", "Denyce", "Anievie", "Ezra Mae", 
+    "Marigold", "Denyce", "Anievie", "Ezra Mae",
     "Steven Jan", "Levi", "Michael", "Delia",
     "Chelo Marie", "Remedios", "Maryhall", "Ana Maria",
     "Jecka", "Aeron"
@@ -77,8 +77,9 @@ const AttendanceForm = () => {
     }
   };
 
+  // Function to delete a name from the selected names list
   const handleDeleteName = (nameToDelete) => {
-    setSelectedNames(selectedNames.filter(n => n !== nameToDelete)); // Remove name from selectedNames
+    setSelectedNames(selectedNames.filter(n => n !== nameToDelete));
   };
 
   const validateRecorder = () => {
@@ -150,7 +151,7 @@ const AttendanceForm = () => {
               <option value="RS and EQ combine">RS and EQ combine</option>
               <option value="YM and YWM combine">YM and YWM combine</option>
               <option value="Primary">Primary</option>
-              <option value="YSA">YSA</option> {/* Added YSA */}
+              <option value="YSA">YSA</option> {/* YSA names are now included */}
               <option value="Others">Others</option>
             </select>
           </div>
@@ -203,8 +204,11 @@ const AttendanceForm = () => {
             <ul>
               {selectedNames.map((n, index) => (
                 <li key={index}>
-                  {n}{" "}
-                  <button type="button" onClick={() => handleDeleteName(n)}>
+                  {n}
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteName(n)}
+                  >
                     Delete
                   </button>
                 </li>
@@ -223,11 +227,13 @@ const AttendanceForm = () => {
             {recorderError && <span className="error-message">{recorderError}</span>}
           </div>
 
-          {selectedNames.length > 0 && (
-            <button type="button" onClick={handleSubmit}>
-              Submit Attendance
-            </button>
-          )}
+          <div className="center-container">
+            {selectedNames.length > 0 && (
+              <button type="button" onClick={handleSubmit}>
+                Submit Attendance
+              </button>
+            )}
+          </div>
         </form>
       ) : (
         <h3>Attendance has been submitted!</h3>
