@@ -1,38 +1,113 @@
-.App {
-  text-align: center;
+.attendance-form {
+  max-width: 600px; /* Set a max width for the form */
+  margin: 20px auto; /* Center the form */
+  padding: 20px;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #f9f9f9; /* Light background color */
+  font-size: 1rem; /* Base font size */
+}
+/* ...previous styles remain the same... */
+
+.delete-button {
+  background-color: #f44336; /* Red background for delete button */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 2px 5px; /* Smaller padding for the delete button */
+  font-size: 0.8rem; /* Smaller font size */
+  transition: background-color 0.3s; /* Smooth transition */
+  width: 50px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.delete-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* ...other styles... */
+
+h2 {
+  text-align: center; /* Center the heading */
+  color: #333; /* Dark text color */
+}
+
+label {
+  display: block; /* Make labels block elements */
+  margin-bottom: 8px; /* Space below labels */
+  font-weight: bold; /* Bold labels */
+}
+
+select,
+input[type="text"] {
+  width: 100%; /* Full width for inputs */
+  padding: 10px; /* Padding inside inputs */
+  margin-bottom: 15px; /* Space below inputs */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding in width */
+  font-size: inherit; /* Inherit font size from parent */
+}
+
+button {
+  padding: 10px 15px; /* Padding inside buttons */
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+  width: 100%; /* Full width for buttons */
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+ul {
+  list-style-type: none; /* Remove bullets from the list */
+  padding: 0; /* Remove padding */
+}
+
+li {
+  display: flex; /* Use flexbox for list items */
+  justify-content: space-between; /* Space between name and button */
+  padding: 10px; /* Padding inside list items */
+  border-bottom: 1px solid #eee; /* Light gray border between items */
+}
+
+li:last-child {
+  border-bottom: none; /* Remove border from the last item */
+}
+
+h3 {
+  margin-top: 20px; /* Space above the heading */
+  color: #333; /* Dark text color */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .attendance-form {
+    padding: 15px; /* Less padding on small screens */
+    font-size: 0.9rem; /* Slightly smaller font size */
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  select,
+  input[type="text"],
+  button {
+    padding: 8px; /* Smaller padding for inputs and buttons */
   }
-  to {
-    transform: rotate(360deg);
+
+  button {
+    padding: 12px; /* Adjust button padding */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Responsive heading size */
+  }
+
+  h3 {
+    font-size: 1.2rem; /* Responsive heading size */
   }
 }
