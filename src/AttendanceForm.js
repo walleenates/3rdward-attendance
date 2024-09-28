@@ -8,9 +8,20 @@ const AttendanceForm = () => {
   const [formData, setFormData] = useState({
     category: "",
     customCategory: "", // For custom category input
+    recorder: "", // For recorder input
   });
 
   const [submitted, setSubmitted] = useState(false); // To track submission status
+  const [recorderError, setRecorderError] = useState(""); // State for recorder error message
+
+  // Allowed words for the recorder's name
+  const allowedWords = [
+    "Roy Cotejo", "Elias Concardas", "Archie Ruda", "Joshua Ejares",
+    "Marigold", "Denyce", "Anievie", "Ezra Mae",
+    "Steven Jan", "Levi", "Michael", "Delia",
+    "Chelo Marie", "Remedios", "Maryhall", "Ana Maria",
+    "Jecka", "Aeron"
+  ]; // Add allowed names here
 
   const handleNameChange = (e) => setName(e.target.value);
 
@@ -21,6 +32,11 @@ const AttendanceForm = () => {
 
   const handleCustomCategoryChange = (e) => {
     setFormData({ ...formData, customCategory: e.target.value });
+  };
+
+  const handleRecorderChange = (e) => {
+    setFormData({ ...formData, recorder: e.target.value });
+    setRecorderError(""); // Reset error message on input change
   };
 
   const handleAddName = (e) => {
@@ -35,11 +51,25 @@ const AttendanceForm = () => {
     setNames(names.filter((_, i) => i !== index)); // Remove name by index
   };
 
+  const validateRecorder = () => {
+    // Check if recorder is blank or not in allowed words
+    if (formData.recorder.trim() === "" || !allowedWords.includes(formData.recorder)) {
+      setRecorderError("You are not authorized!"); // Set error message if invalid
+      return false; // Prevent submission if recorder is invalid
+    }
+    return true; // Valid recorder
+  };
+
   const handleSubmit = () => {
     // Check if category is selected
     if (formData.category === "") {
       alert("Please select an auxiliary before submitting.");
       return; // Prevent submission if no category is selected
+    }
+
+    // Check if recorder is valid
+    if (!validateRecorder()) {
+      return; // Prevent submission if recorder is invalid
     }
 
     // Prepare the full data to send via email
@@ -48,7 +78,8 @@ const AttendanceForm = () => {
       category: formData.category === "Others" ? formData.customCategory : formData.category, // Use custom category if selected
       names: names.join(", "),             // List of names, joined by comma
       date: new Date().toLocaleDateString(), // Current date
-      total: totalNames                     // Total number of names
+      total: totalNames,                   // Total number of names
+      recorder: formData.recorder           // Recorder's name
     };
 
     const confirmation = window.confirm("Are you sure you want to submit the attendance?");
@@ -70,7 +101,7 @@ const AttendanceForm = () => {
         });
 
       // Reset form after submission
-      setFormData({ category: "", customCategory: "" });
+      setFormData({ category: "", customCategory: "", recorder: "" });
       setNames([]);
     }
   };
@@ -112,6 +143,18 @@ const AttendanceForm = () => {
               />
             </div>
           )}
+
+          {/* Recorder input */}
+          <div>
+            <label>Recorded and Confirmed By:</label>
+            <input
+              type="text"
+              value={formData.recorder}
+              onChange={handleRecorderChange}
+              required
+            />
+            {recorderError && <span className="error-message">{recorderError}</span>}
+          </div>
 
           {/* Disable the name input if no category is selected */}
           <div>
