@@ -18,7 +18,7 @@ const AttendanceForm = () => {
       "Franzyn Dabatos", "Ian Rei", "Ivy Barros", "Joshua Ejares", 
       "Julito", "Kisha Daniel", "Kristine Caylan", "Laiza", "Laurence", 
       "Melody", "Marigold", "Rhyzel", "Shannen", "Trisha", "Vinz Pedrano", 
-      "Walleen Gwapo", "Yana Riego", "Mariel Ablin"
+      "Walleen Gwapo", "Yana Riego", "Mariel Ablin", "Franz Maagad"
     ]
   };
 
